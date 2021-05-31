@@ -1,0 +1,125 @@
+﻿@model GetWellWebApplication.Models.patient
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+@Html.Partial("header")
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="informations-patient">
+        <div class="container-fluid form-section">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 com-lg-4 title-container-informations">
+                    <h1 class="title-infomations">Les <b>informations</b> de patient</h1>
+                    <hr class="prgrss">
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-8 gradient">
+                    <form method="post">
+                        <div class="container-fluid form-content">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="nom">Nom *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.EditorFor(model => model.Nom, new { htmlAttributes = new { @class = "inputs", placeholder = "entrer votre nom" } })
+                                    @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="prenom">Prneom *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Prenom, new { Class = "inputs", placeholder = "entrer votre prenom" })
+                                    @Html.ValidationMessageFor(model => model.Prenom, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="CIN">Cin *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.CIN, new { Class = "inputs", placeholder = "entrer votre CIN" })
+                                    @Html.ValidationMessageFor(model => model.CIN, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="dnaissance">Date de naissance *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Date_naissance, new { Class = "inputs", placeholder = "entrer votre date de naissance", Type = "date" })
+                                    @Html.ValidationMessageFor(model => model.Date_naissance, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="tel">Tel *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Tel, new { Class = "inputs", placeholder = "entrer votre telephone" })
+                                    @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="email">Email *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Email, new { Class = "inputs", placeholder = "entrer votre Email" })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 button-container">
+                                    <input id="Suivant" type="submit" value="Suivant" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @Html.Partial("footer")
+        </div>
+    </div>
+}
+@using (Html.BeginForm("AlreadyExistMessagePost", "Home", FormMethod.Post))
+{
+    <div class="modal fade" id="myModal" role="dialog" data-url="@Url.Action("AlreadyExistMessage","Home")"></div>
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+@{
+
+    if (ViewBag.Data != null)
+    {
+          <script>
+                    var url = $('#myModal').data('url');
+               $.get(url, function (data) {
+                    $('#myModal').html(data);
+                    $('#myModal').modal('show');
+               });
+           </script>
+    }
+}
+    <script>
+    $(document).ready(function () {
+      $.ajax({
+           type: 'GET',
+           url: '@Url.Action("GetDoctorById", "Home")',
+           dataType: 'json',
+           success: function (data) {
+               console.log(data);
+               $('.doctor-name-nav-form').append("<img src='/" + data[0].Image + "' class='Doctor-name-img'>");
+               $('#doc-name').html(data[0].Prenom + " " + data[0].Nom);
+           },
+           error: function(error){
+               console.log(error);
+           }
+      });
+    });
+    </script>
+
+
+

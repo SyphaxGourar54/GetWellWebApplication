@@ -1,0 +1,536 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* navbar styles*/
+
+.Logo{
+    width: 3em;
+    height: 3em;
+}
+
+.Login-sep{
+    color: white;
+    width: 100%;
+}
+
+.login-sep-container{
+    padding: 2em;
+}
+
+.Login-sep-text {
+    font-weight: 800;
+    color: white;
+    width: 100%;
+}
+
+#button-container {
+    display: grid;
+    align-items: center;
+    justify-content: end;
+    margin-top: 0.6em;
+}
+
+.navbar-brand{
+    margin-left: 5rem;
+}
+
+
+.navbar {
+    background-color: #24252a;
+    height: 5em;
+    box-shadow: 0px 0px 5px brown;
+    color: #0000;
+}
+.Btn-Prendre-rendez-vous,
+.Btn-tele-consulatation{
+   height: 3em;
+   border-radius: 0.8em;
+   outline: none;
+   margin-right: 1rem;
+   margin-bottom: 0.5em;
+}
+
+.Btn-tele-consulatation{
+   background-color: #FFFFFF;
+   border: 3px solid #000000;
+}
+.Btn-Prendre-rendez-vous{
+    background-color: #08B26C;
+    color: #FFFFFF;
+    width: 15em;
+    margin-right: 5rem;
+    border: 1px solid #707070;
+}
+/* title section*/
+.container-fluid {
+    background-color: #2B2F32;
+    height: max-content;
+    width: 100%;
+}
+
+.title-container-informations {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #050A30;
+    color: #FFFFFF;
+}
+
+.title-infomations{
+    padding-left: 3em;
+    padding-right: 4.5em;
+    padding-bottom: 3em;
+    text-shadow: 0 1px 2px #000000;
+}
+/*contenu du formumaire*/
+.form-content{
+    display: grid;
+    align-items: center;
+}
+
+.select {
+    background-color: #2B2F32;
+    outline: none;
+    width: 16em;
+    border-radius: 0.5em;
+    color:#FFFFFF;
+    font-size: 1.3rem;
+    padding-left: 1em;
+    margin-left: 1.77em;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-radius: 0;
+    border-bottom: 1px solid white;
+    padding-bottom: 0.3em;
+    margin-top: 1em;
+}
+
+.normal {
+    background-color: transparent;
+    outline: none;
+    width: 16em;
+    border-radius: 0.5em;
+    color: white;
+    font-size: 1.3rem;
+    padding-left: 1em;
+    margin-left: 1.77em;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-radius: 0;
+    border-bottom: 1px solid white;
+    padding-bottom: 0.3em;
+    margin-top: 1em;
+}
+
+
+
+::placeholder{
+    color: white;
+    margin-left: 1em;
+}
+
+label{
+    margin-top: 2rem;
+    color: white;
+    font-size: 1.2rem;
+    margin-left: 2em;
+}
+
+#long,#lat{
+    width: 7em;
+}
+
+#Sinscrire{
+    width: 15em;
+    outline: none;
+    border: 1px solid #707070;
+    background-color: #08B26C;
+    height: 2.7em;
+    color: white;
+    border-radius: 15px;
+    transition: 0.7s;
+    margin-top: 4rem;
+    margin-bottom: 2rem;
+}
+#Sinscrire:hover{
+    border: 1px solid #fccdcd;
+    background-color: #00579F;
+    border-radius: 20px;
+}
+
+#Load {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    overflow: hidden;
+    background-color: brown;
+}
+
+.form-section {
+    background-color: #2B2F32;
+}
+
+@keyframes spin {
+    100%{
+        transform: rotate(300deg)
+    }
+} 
+
+.button-container{
+    display: grid;
+    justify-content: end;
+    align-items: center;
+}
+
+.Logo1{
+    width: 4em;
+    height: 4em;
+}
+.foo1{
+    justify-content: center;
+    align-items: center;
+   flex-direction: column;
+ }
+
+
+ @media only screen and (max-width: 1076px) {
+    .container-fluid {
+        background-color: #00579F;
+        height: max-content;
+        width: 100%;
+    }
+    .normal,select{
+        width: 17rem;
+    }
+    #lat{
+        margin-left: 4rem;
+    }
+}
+@media only screen and (max-width: 1024px) {
+    .container-fluid {
+        background-color: #00579F;
+        height: max-content;
+        width: 100%;
+    }
+    
+    #lat{
+        margin-left: 2rem;
+    }
+    
+}
+@media only screen and (max-width: 991px) {
+    textarea,
+    input{
+        width: 25em;
+    }
+    .title-infomations{
+        margin-left: 3em;
+    }
+    
+    .container-fluid{
+        height: 131em;
+    }
+    .button-container{
+        margin-left: 1rem;
+    }
+    .container-fluid {
+        background-color: #00579F;
+        height: max-content;
+        width: 100%;
+    }
+}
+
+
+@media only screen and (max-width: 882px) {
+    textarea,
+    input{
+        width: 22em;
+    }
+    .button-container{
+        margin-left: -3rem;
+    }
+    .container-fluid {
+        background-color: #00579F;
+        height: max-content;
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 814px) {
+    textarea,
+    input{
+        width: 20em;
+    }
+    .container-fluid{
+        height: 131em;
+    }
+    .button-container{
+        margin-left: -6rem;
+    }
+    .container-fluid {
+        background-color: #00579F;
+        height: max-content;
+        width: 100%;
+    }
+}
+@media only screen and (max-width: 768px) {
+    #lat,#long{
+        width: 8rem;
+    }
+    .container-fluid {
+        background-color: #00579F;
+        height: max-content;
+        width: 100%;
+    }
+    #lat{
+        margin-left: 1rem;
+    }
+    /*footer{
+        width: 47.3rem;
+    }*/
+    #Sinscrire{
+        margin-left: 6rem;
+    }
+}
+
+@media only screen and (max-width: 776px) {
+    textarea,
+    input{
+        width: 19em;
+    }
+    .container-fluid{
+        height: 131em;
+    }
+    .container-fluid {
+        background-color: #00579F;
+        height: max-content;
+        width: 100%;
+    }
+}
+
+
+@media only screen and (max-width: 744px){
+    textarea,
+    input{
+        width: 25em;
+    }
+    .container-fluid {
+        background-color: #00579F;
+        height: max-content;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 730px){
+    textarea,
+    input{
+        width: 29em;
+    }
+    .container-fluid {
+        background-color: #00579F;
+        height: max-content;
+        width: 100%;
+    }
+    .navbar-brand{
+        margin-left: 2em;
+    }
+    
+    
+}
+
+@media only screen and (max-width: 627px){
+    textarea,
+    input{
+        width: 22em;
+    }
+    .container-fluid {
+        background-color: #00579F;
+        height: max-content;
+        width: 100%;
+    }
+    .navbar-brand{
+        display: none;
+        
+    }
+    .Btn-tele-consulatation{
+        width: 10rem;
+    }
+    .Btn-Prendre-rendez-vous,.Btn-tele-consulatation{
+        margin-left: 3rem;
+
+    }
+    .button-container{
+        margin-left: -5rem;
+    }
+    .navbar{
+        width: 67rem;
+    }
+    label{
+        margin-left: 15rem;
+    }
+    .normal,select{
+        margin-left: 20rem;
+    }
+    
+}
+
+@media only screen and (max-width: 613px){
+    .button-container{
+        margin-left: -5rem;
+    }
+}
+@media only screen and (max-width: 603px){
+    .navbar{
+        width:37rem ;
+    }
+    .container-fluid{
+        width: 36rem;
+        height: 137rem;
+    }
+    
+   
+    .normal,select{
+        margin-left: 10rem;
+    }
+    #lat{
+        margin-left: 1rem;
+    }
+    #Sinscrire{
+        margin-left: 13rem;
+
+    }
+    .title-infomations{
+        margin-top: 5rem;
+    }
+    
+}
+
+@media only screen and (max-width: 500px){
+    textarea,
+    input{
+        width: 21em;
+    }
+    .title-infomations{
+        margin-top: 3em;
+    }
+    .container-fluid{
+        height: 131em;
+    }
+    .button-container{
+        margin-left: -1rem;
+    }
+    .navbar{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        background-color: #a7ceee;
+    }
+    .navbar-brand{
+        display: none;
+        
+    }
+    .d-flex{
+        display: flex;
+        flex-direction: column;
+    }
+    .Btn-tele-consulatation{
+        width: 15rem;
+    }
+    .Btn-Prendre-rendez-vous,.Btn-tele-consulatation{
+        margin-left: 5rem;
+
+    }
+    #lat{
+        margin-left:2rem;
+    }
+    #Sinscrire{
+        margin-left: 13rem;}
+
+}
+
+
+@media only screen and (max-width:414px){
+    .container-fluid{
+        height:144rem ;
+        width: 29.2rem;
+    }
+    .navbar{
+        width: 29.8rem;
+    }
+    footer{
+        width: 29.2rem;
+    }
+    label{
+        margin-left: 5rem;
+
+    }
+    .normal,select{
+        width: 11em;
+        margin-left: 6rem;
+    }
+    #lat{
+        margin-left: 4.9em;
+    }
+}
+@media only screen and (max-width:375px){
+    .container-fluid{
+        height:144rem ;
+        width: 30rem;
+    }
+    .navbar{
+        width: 30.8rem;
+    }
+    footer{
+        width: 30rem;
+    }
+    .normal{
+        width: 15rem;
+    }
+    #lat{
+          margin-left: 10rem;
+    }
+}
+
+@media only screen and (max-width:280px)
+{
+    .navbar{
+        width: 26.3rem;
+    }
+    label{
+        margin-left: 4rem;
+
+    }
+    .normal,select{
+        width: 11em;
+        margin-left: 4rem;
+    }
+    .container-fluid{
+        height:144rem ;
+        width: 25.6rem;
+    }
+    footer{
+        width: 25.6rem;
+    }
+    #lat,#long{
+        width: 13rem;
+    }
+    #lat{
+        margin-left: 3.4em;
+    }
+    
+    
+}
+
+
+
+
+
+
+
+
+

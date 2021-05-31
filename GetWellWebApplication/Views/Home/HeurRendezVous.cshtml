@@ -1,0 +1,133 @@
+﻿@model GetWellWebApplication.Models.rendezvous
+
+@Html.Partial("header")
+<div class="informations-patient">
+    <div class="container-fluid form-section">
+        <div class="row">
+            <div class="col-sm-12 col-md-4 com-lg-4 title-container-informations">
+                <h1 class="title-infomations">Choisir <b>l'heure</b> de rendez-vous</h1>
+            </div>
+            <div class="col-sm-12 col-md-8 col-lg-8">
+                <form method="post">
+                    <div class="container-fluid hours-form">
+                        <div class="row hours-field">
+                            <div class="col-md-12 col-lg-12 col-sm-12 hours-container">
+                                <div class="row hours-header">
+                                    <div class="col-lg-12 col-sm-12 hours-header-content">
+                                        @{
+                                              <p>
+                                                    @ViewBag.Day
+                                              </p>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-6 hours">
+                                        <div class="hours-content" id="first-hour">
+                                            <p>9:00</p>
+                                        </div>
+                                        <div class="hours-content" id="second-hour">
+                                            <p>10:00</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 hours">
+                                        <div class="hours-content" id="third-hour">
+                                            <p>14:00</p>
+                                        </div>
+                                        <div class="hours-content" id="fourth-hour">
+                                            <p>15:00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" id="button-container">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
+                                <a href="Index.html">
+                                    <button id="Suivant">Continuer et terminer</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <footer>
+                <div class="footer-container">
+                    <img src="~/Images/LogoPNG.png" class="footer-logo">
+                    <br>
+                    <p>Contacter nous</p>
+                    <br>
+                    <p>Apropos de nous</p>
+                    <br>
+                    <br>
+                    <p>©     copyrights GetWell 2021 - tous droits réservés</p>
+                </div>
+            </footer>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+           type: 'GET',
+           url: '@Url.Action("GetDoctorById", "Home")',
+           dataType: 'json',
+           success: function (data) {
+               console.log(data);
+               $('.doctor-name-nav-form').append("<img src='/" + data[0].Image + "' class='Doctor-name-img'>");
+               $('#doc-name').html(data[0].Prenom + " " + data[0].Nom);
+           },
+           error: function(error){
+               console.log(error);
+           }
+        });
+        var hour;
+        $('#first-hour').on("click", function () {
+            $('.hours-content').css({ "background-color": "#F74A11", "color": "#FFFFFF", "border-radius": "0.6em"})
+            $(this).css({ "background-color": "#64c5b8da", "color": "#050404", "border-radius": "0.8em" });
+            hour = $('#first-hour > p').text();
+        });
+        $('#second-hour').on("click", function () {
+            $('.hours-content').css({ "background-color": "#F74A11", "color": "#FFFFFF", "border-radius": "0.6em" })
+            $(this).css({ "background-color": "#64c5b8da", "color": "#050404", "border-radius": "0.8em" });
+            hour = $('#secend-hour > p').text();
+        });
+        $('#third-hour').on("click", function () {
+            $('.hours-content').css({ "background-color": "#F74A11", "color": "#FFFFFF", "border-radius": "0.6em" })
+            $(this).css({ "background-color": "#64c5b8da", "color": "#050404", "border-radius": "0.8em" });
+            hour = $('#third-hour > p').text();
+        });
+        $('#fourth-hour').on("click", function () {
+            $('.hours-content').css({ "background-color": "#F74A11", "color": "#FFFFFF", "border-radius": "0.6em" })
+            $(this).css({ "background-color": "#64c5b8da", "color": "#050404", "border-radius": "0.8em" });
+            hour = $('#fourth-hour > p').text();
+        });
+        $('#Suivant').on("click", function () {
+            console.log(hour);
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("HeurRendezVous", "Home")',
+                dataType: 'json',
+                data: { heure: hour },
+                success: function (data) {
+                    console.log(data);
+                },
+
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+        })
+    });
+    function toDate(dStr, format) {
+        var now = new Date();
+        if (format == "h:m") {
+            now.setHours(dStr.substr(0, dStr.indexOf(":")));
+            now.setMinutes(dStr.substr(dStr.indexOf(":") + 1));
+            now.setSeconds(0);
+            return now;
+        }
+    }
+</script>

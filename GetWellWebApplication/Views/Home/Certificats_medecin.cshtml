@@ -1,0 +1,84 @@
+﻿@model GetWellWebApplication.Models.certificat
+
+@Styles.Render("~/Information_doc/css")
+<header>
+    <nav class="navbar sticky-top">
+        <a class="navbar-brand" href="/Home">
+            <img src="~/Images/LogoPNG.png" class="Logo">
+        </a>
+    </nav>
+</header>
+@using (Html.BeginForm("Certificats_medecin", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken();
+    <div class="informations-medecin">
+        <div class="container-fluid form-section">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 com-lg-4 title-container-informations fit-page">
+                    <h1 class="title-infomations">Les <b>informations</b> de docteur</h1>
+                    <hr class="prgrss">
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-8 marg-top">
+                    <form method="post">
+                        <div class="container-fluid form-content">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 success">
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="Annee">Anneé</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(modal => modal.annén, new { @class = "normal", placeholder = "Année" })
+                                    @Html.ValidationMessageFor(model => model.annén, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="nom">Nom De certificat*</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.NomCert, new { Class = "normal", placeholder = "Nom" })
+                                    @Html.ValidationMessageFor(model => model.NomCert, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="nom">Institut</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.institut, new { Class = "normal", placeholder = "institut" })
+                                    @Html.ValidationMessageFor(model => model.institut, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 button-container">
+                                    <input id="Sinscrire" type="submit" value="s'inscrire" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @Html.Partial("footer")
+        </div>
+    </div>
+
+}
+@using (Html.BeginForm("SuccessMessage", "Home", FormMethod.Post))
+{
+    <div class="modal fade" id="success" role="dialog" data-url="@Url.Action("SuccessMessage", "Home")"></div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+@{
+    if (ViewBag.result == "done")
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('.success').append("<i class='fas fa-check-circle'></i><p>Une certificat à été ajouté à votre compte avec succés</p>")
+            });
+        </script>
+    }
+}

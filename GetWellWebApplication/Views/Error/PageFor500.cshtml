@@ -1,0 +1,30 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    @Styles.Render("~/Accueil/css")
+    @Styles.Render("~/Content/css")
+    <title>Error 404</title>
+</head>
+<body>
+    <div class="container Error-container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 col-lg-6 paragraphs-container">
+                <p class="Error-type">500</p>
+                <p class="description">il y'a une erreur dans le serveur,Ressayer plus tard</p>
+
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <img src="~/Images/no-data-concept-illustration/3024051.jpg" class="Error-image" />
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <input type="submit" value="Resseyer" id="GoToHome">
+            </div>
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

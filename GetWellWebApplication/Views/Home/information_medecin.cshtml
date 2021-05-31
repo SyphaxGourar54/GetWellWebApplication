@@ -1,0 +1,245 @@
+﻿
+@model GetWellWebApplication.Models.medecin
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+@Styles.Render("~/Information_doc/css")
+<header>
+    <nav class="navbar sticky-top">
+        <a class="navbar-brand" href="/Home/Accueil">
+            <img src="~/Images/LogoPNG.png" class="Logo">
+        </a>
+    </nav>
+</header>
+@using (Html.BeginForm("information_medecin", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken();
+    <div class="informations-medecin">
+        <div class="container-fluid form-section">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 com-lg-4 title-container-informations">
+                    <h1 class="title-infomations">Les <b>informations</b> de docteur</h1>
+                    <hr class="prgrss">
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-8">
+                    <form method="post">
+                        <div class="container-fluid form-content">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="cin">CIN*</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(modal => modal.cin, new { @class = "normal", placeholder = "entrer votre CIN" })
+                                    @Html.ValidationMessageFor(model => model.cin, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="nom">Nom *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Nom, new { Class = "normal", placeholder = "entrer votre Nom" })
+                                    @Html.ValidationMessageFor(model => model.Nom, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="prenom">Prenom *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Prenom, new { Class = "normal", placeholder = "entrer votre prenom" })
+                                    @Html.ValidationMessageFor(model => model.Prenom, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="photo">photo *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <input type="file" name="ImageFile" class="normal" id="img" />
+                                    @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="tel">Tel *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Tel, new { Class = "normal", placeholder = "entrer votre numero telephone" })
+                                    @Html.ValidationMessageFor(model => model.Tel, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="email">Email *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Email, new { Class = "normal", placeholder = "entrer votre Email" })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="city">Ville *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <select name="ville" id="city" class="select">
+                                        <option value="Casablanca">Casablanca</option>
+                                        <option value="Fes">Fes</option>
+                                        <option value="Tanger">Tanger</option>
+                                        <option value="Marrakech">Marrakech</option>
+                                        <option value="Salé">Salé</option>
+                                        <option value="Meknes">Meknes</option>
+                                        <option value="Rabat">Rabat</option>
+                                        <option value="Oujda">Oujda</option>
+                                        <option value="kenitra">kenitra</option>
+                                        <option value="Agadir">Agadir</option>
+                                        <option value="Tétouan">Tétouan</option>
+                                        <option value="Témara">Témara</option>
+                                        <option value="Safi">Safi</option>
+                                        <option value="Mohammédia">Mohammédia</option>
+                                        <option value="Khouribga">Khouribga</option>
+                                        <option value="Nador">Nador</option>
+                                        <option value="El jadida">El jadida</option>
+                                        <option value="Taza">Taza</option>
+                                        <option value="Khémisset">Khémisset</option>
+                                        <option value="Béni Mellal">Béni Mellal</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="adresse">Adresse *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Adresse, new { Class = "normal", placeholder = "entrer votre Adresse" })
+                                    @Html.ValidationMessageFor(model => model.Adresse, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="localisation">Geolocalisation *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.longitude, new { Class = "normal", placeholder = "longitude", id = "long" })
+                                    @Html.TextBoxFor(model => model.latitude, new { Class = "normal", placeholder = "latitude", id = "lat" })
+
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="Linkedin">Linkedin</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Linkeden, new { Class = "normal", placeholder = "entrer votre Linkedin" })
+                                    @Html.ValidationMessageFor(model => model.Linkeden, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="fb">Facebook</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Facebook, new { Class = "normal", placeholder = "entrer votre Facebook" })
+                                    @Html.ValidationMessageFor(model => model.Facebook, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="Whatssap">Whatssap</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Whatsapp, new { Class = "normal", placeholder = "entrer votre whatssap" })
+                                    @Html.ValidationMessageFor(model => model.Whatsapp, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="insta">instagram</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Instagram, new { Class = "normal", placeholder = "entrer votre instagram" })
+                                    @Html.ValidationMessageFor(model => model.Instagram, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label for="twit">twitter</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.TextBoxFor(model => model.Twitter, new { Class = "normal", placeholder = "entrer votre Twitter" })
+                                    @Html.ValidationMessageFor(model => model.Twitter, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <label for="twit">Specialité</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.DropDownList("CategoryList", ViewBag.categories as SelectList, "Votre specialité", new { @class = "select"})
+                                    @Html.ValidationMessageFor(model => model.Twitter, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="username">Nom D'utilisateur*</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "normal", placeholder = "entrer votre nom d'utilisateur" } })
+                                    @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="password">Mot de passe *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.PasswordFor(model => model.password, new { Class = "normal", placeholder = "entrer votre Mot de passe" })
+                                    @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row g-10">
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <label for="password">Confirmation du mot de passe *</label>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    @Html.PasswordFor(model => model.Confirmpassword, new { Class = "normal", placeholder = "confirmer votre Mot de passe" })
+                                    @Html.ValidationMessageFor(model => model.Confirmpassword, "", new { @class = "text-white m-5" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12 button-container">
+                                    <input id="Sinscrire" type="submit" value="s'inscrire" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @Html.Partial("footer")
+        </div>
+    </div>
+
+}
+@using (Html.BeginForm("AlreadyExistMessageForMedecinPost", "Home", FormMethod.Post))
+{
+    <div class="modal fade" id="AlreadyExist" role="dialog" data-url="@Url.Action("AlreadyExistMessageForMedecin","Home")"></div>
+}
+@Scripts.Render("~/bundles/jqueryval")
+@{
+    if (ViewBag.Data == "Exists")
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var url = $('#AlreadyExist').data('url');
+                $.get(url, function (data) {
+                    $('#AlreadyExist').html(data);
+                    $('#AlreadyExist').modal('show');
+                });
+            });
+        </script>
+    }
+}
+
+

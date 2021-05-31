@@ -1,0 +1,735 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="db_a7366b_getwellModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="categorie">
+          <Key>
+            <PropertyRef Name="Id_cat" />
+          </Key>
+          <Property Name="Id_cat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="40" />
+          <Property Name="Description" Type="varchar" MaxLength="60" />
+          <Property Name="#Id_doc" Type="int" />
+        </EntityType>
+        <EntityType Name="certificat">
+          <Key>
+            <PropertyRef Name="Num_cert" />
+          </Key>
+          <Property Name="Num_cert" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="20" />
+          <Property Name="institut" Type="varchar" MaxLength="30" />
+          <Property Name="annén" Type="varchar" MaxLength="4" />
+          <Property Name="#Id_doc" Type="int" />
+        </EntityType>
+        <EntityType Name="diagnostique">
+          <Key>
+            <PropertyRef Name="Id_diag" />
+          </Key>
+          <Property Name="Id_diag" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="60" />
+          <Property Name="Date_diag" Type="datetime" />
+          <Property Name="#Id_patient" Type="int" />
+          <Property Name="#Id_doc" Type="int" />
+        </EntityType>
+        <EntityType Name="medecin">
+          <Key>
+            <PropertyRef Name="Id_doc" />
+          </Key>
+          <Property Name="Id_doc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="20" />
+          <Property Name="Nom" Type="varchar" MaxLength="20" />
+          <Property Name="Prenom" Type="varchar" MaxLength="20" />
+          <Property Name="Tel" Type="varchar" MaxLength="30" />
+          <Property Name="Email" Type="varchar" MaxLength="40" />
+          <Property Name="Nbrpatients" Type="int" />
+          <Property Name="ville" Type="varchar" MaxLength="30" />
+          <Property Name="Adresse" Type="varchar" MaxLength="50" />
+          <Property Name="Facebook" Type="varchar" MaxLength="20" />
+          <Property Name="Whatsapp" Type="varchar" MaxLength="30" />
+          <Property Name="Instagram" Type="varchar" MaxLength="20" />
+          <Property Name="Twitter" Type="varchar" MaxLength="20" />
+          <Property Name="Linkeden" Type="varchar" MaxLength="20" />
+          <Property Name="password" Type="binary" MaxLength="64" />
+          <Property Name="salt" Type="uniqueidentifier" />
+          <Property Name="latitude" Type="float" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="cin" Type="varchar" MaxLength="20" />
+          <Property Name="image" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="nootation">
+          <Key>
+            <PropertyRef Name="Id_not" />
+          </Key>
+          <Property Name="Id_not" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Note" Type="float" />
+          <Property Name="#Id_patient" Type="int" />
+          <Property Name="#Id_doc" Type="int" />
+        </EntityType>
+        <EntityType Name="patient">
+          <Key>
+            <PropertyRef Name="Id_patient" />
+          </Key>
+          <Property Name="Id_patient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CIN" Type="varchar" MaxLength="10" />
+          <Property Name="Nom" Type="varchar" MaxLength="20" />
+          <Property Name="Prenom" Type="varchar" MaxLength="20" />
+          <Property Name="Date_naissance" Type="datetime" />
+          <Property Name="Tel" Type="varchar" MaxLength="30" />
+          <Property Name="Email" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="rendezvous">
+          <Key>
+            <PropertyRef Name="Id_rv" />
+          </Key>
+          <Property Name="Id_rv" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="dateprise" Type="datetime" />
+          <Property Name="temp_rdv" Type="time" Precision="7" />
+          <Property Name="#Id_patient" Type="int" />
+          <Property Name="#Id_doc" Type="int" />
+          <Property Name="#Id_cat" Type="int" />
+        </EntityType>
+        <EntityType Name="teleconsultation">
+          <Key>
+            <PropertyRef Name="Id_telecon" />
+          </Key>
+          <Property Name="Id_telecon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="60" />
+          <Property Name="Date_telecon" Type="datetime" />
+          <Property Name="#Id_patient" Type="int" />
+          <Property Name="#Id_doc" Type="int" />
+        </EntityType>
+        <Association Name="FK__categorie__#Id_d__3D5E1FD2">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="0..1" />
+          <End Role="categorie" Type="Self.categorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medecin">
+              <PropertyRef Name="Id_doc" />
+            </Principal>
+            <Dependent Role="categorie">
+              <PropertyRef Name="#Id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__certifica__#Id_d__44FF419A">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="0..1" />
+          <End Role="certificat" Type="Self.certificat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medecin">
+              <PropertyRef Name="Id_doc" />
+            </Principal>
+            <Dependent Role="certificat">
+              <PropertyRef Name="#Id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__diagnosti__#Id_d__48CFD27E">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="0..1" />
+          <End Role="diagnostique" Type="Self.diagnostique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medecin">
+              <PropertyRef Name="Id_doc" />
+            </Principal>
+            <Dependent Role="diagnostique">
+              <PropertyRef Name="#Id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__diagnosti__#Id_p__47DBAE45">
+          <End Role="patient" Type="Self.patient" Multiplicity="0..1" />
+          <End Role="diagnostique" Type="Self.diagnostique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patient">
+              <PropertyRef Name="Id_patient" />
+            </Principal>
+            <Dependent Role="diagnostique">
+              <PropertyRef Name="#Id_patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__nootation__#Id_d__4CA06362">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="0..1" />
+          <End Role="nootation" Type="Self.nootation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medecin">
+              <PropertyRef Name="Id_doc" />
+            </Principal>
+            <Dependent Role="nootation">
+              <PropertyRef Name="#Id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__nootation__#Id_p__4BAC3F29">
+          <End Role="patient" Type="Self.patient" Multiplicity="0..1" />
+          <End Role="nootation" Type="Self.nootation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patient">
+              <PropertyRef Name="Id_patient" />
+            </Principal>
+            <Dependent Role="nootation">
+              <PropertyRef Name="#Id_patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rendezvou__#Id_c__4222D4EF">
+          <End Role="categorie" Type="Self.categorie" Multiplicity="0..1" />
+          <End Role="rendezvous" Type="Self.rendezvous" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorie">
+              <PropertyRef Name="Id_cat" />
+            </Principal>
+            <Dependent Role="rendezvous">
+              <PropertyRef Name="#Id_cat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rendezvou__#Id_d__412EB0B6">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="0..1" />
+          <End Role="rendezvous" Type="Self.rendezvous" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medecin">
+              <PropertyRef Name="Id_doc" />
+            </Principal>
+            <Dependent Role="rendezvous">
+              <PropertyRef Name="#Id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rendezvou__#Id_p__403A8C7D">
+          <End Role="patient" Type="Self.patient" Multiplicity="0..1" />
+          <End Role="rendezvous" Type="Self.rendezvous" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patient">
+              <PropertyRef Name="Id_patient" />
+            </Principal>
+            <Dependent Role="rendezvous">
+              <PropertyRef Name="#Id_patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teleconsu__#Id_d__5070F446">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="0..1" />
+          <End Role="teleconsultation" Type="Self.teleconsultation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medecin">
+              <PropertyRef Name="Id_doc" />
+            </Principal>
+            <Dependent Role="teleconsultation">
+              <PropertyRef Name="#Id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teleconsu__#Id_p__4F7CD00D">
+          <End Role="patient" Type="Self.patient" Multiplicity="0..1" />
+          <End Role="teleconsultation" Type="Self.teleconsultation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patient">
+              <PropertyRef Name="Id_patient" />
+            </Principal>
+            <Dependent Role="teleconsultation">
+              <PropertyRef Name="#Id_patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_a7366b_getwellModelStoreContainer">
+          <EntitySet Name="categorie" EntityType="Self.categorie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="certificat" EntityType="Self.certificat" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="diagnostique" EntityType="Self.diagnostique" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="medecin" EntityType="Self.medecin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nootation" EntityType="Self.nootation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="patient" EntityType="Self.patient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="rendezvous" EntityType="Self.rendezvous" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="teleconsultation" EntityType="Self.teleconsultation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__categorie__#Id_d__3D5E1FD2" Association="Self.FK__categorie__#Id_d__3D5E1FD2">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="categorie" EntitySet="categorie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__certifica__#Id_d__44FF419A" Association="Self.FK__certifica__#Id_d__44FF419A">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="certificat" EntitySet="certificat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__diagnosti__#Id_d__48CFD27E" Association="Self.FK__diagnosti__#Id_d__48CFD27E">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="diagnostique" EntitySet="diagnostique" />
+          </AssociationSet>
+          <AssociationSet Name="FK__diagnosti__#Id_p__47DBAE45" Association="Self.FK__diagnosti__#Id_p__47DBAE45">
+            <End Role="patient" EntitySet="patient" />
+            <End Role="diagnostique" EntitySet="diagnostique" />
+          </AssociationSet>
+          <AssociationSet Name="FK__nootation__#Id_d__4CA06362" Association="Self.FK__nootation__#Id_d__4CA06362">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="nootation" EntitySet="nootation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__nootation__#Id_p__4BAC3F29" Association="Self.FK__nootation__#Id_p__4BAC3F29">
+            <End Role="patient" EntitySet="patient" />
+            <End Role="nootation" EntitySet="nootation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rendezvou__#Id_c__4222D4EF" Association="Self.FK__rendezvou__#Id_c__4222D4EF">
+            <End Role="categorie" EntitySet="categorie" />
+            <End Role="rendezvous" EntitySet="rendezvous" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rendezvou__#Id_d__412EB0B6" Association="Self.FK__rendezvou__#Id_d__412EB0B6">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="rendezvous" EntitySet="rendezvous" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rendezvou__#Id_p__403A8C7D" Association="Self.FK__rendezvou__#Id_p__403A8C7D">
+            <End Role="patient" EntitySet="patient" />
+            <End Role="rendezvous" EntitySet="rendezvous" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teleconsu__#Id_d__5070F446" Association="Self.FK__teleconsu__#Id_d__5070F446">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="teleconsultation" EntitySet="teleconsultation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teleconsu__#Id_p__4F7CD00D" Association="Self.FK__teleconsu__#Id_p__4F7CD00D">
+            <End Role="patient" EntitySet="patient" />
+            <End Role="teleconsultation" EntitySet="teleconsultation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="db_a7366b_getwellModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="categorie">
+          <Key>
+            <PropertyRef Name="Id_cat" />
+          </Key>
+          <Property Name="Id_cat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="C_Id_doc" Type="Int32" />
+          <NavigationProperty Name="medecin" Relationship="Self.FK__categorie___Id_d__3D5E1FD2" FromRole="categorie" ToRole="medecin" />
+          <NavigationProperty Name="rendezvous" Relationship="Self.FK__rendezvou___Id_c__4222D4EF" FromRole="categorie" ToRole="rendezvous" />
+        </EntityType>
+        <EntityType Name="certificat">
+          <Key>
+            <PropertyRef Name="Num_cert" />
+          </Key>
+          <Property Name="Num_cert" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="institut" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="annén" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="C_Id_doc" Type="Int32" />
+          <NavigationProperty Name="medecin" Relationship="Self.FK__certifica___Id_d__44FF419A" FromRole="certificat" ToRole="medecin" />
+        </EntityType>
+        <EntityType Name="diagnostique">
+          <Key>
+            <PropertyRef Name="Id_diag" />
+          </Key>
+          <Property Name="Id_diag" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Date_diag" Type="DateTime" Precision="3" />
+          <Property Name="C_Id_patient" Type="Int32" />
+          <Property Name="C_Id_doc" Type="Int32" />
+          <NavigationProperty Name="medecin" Relationship="Self.FK__diagnosti___Id_d__48CFD27E" FromRole="diagnostique" ToRole="medecin" />
+          <NavigationProperty Name="patient" Relationship="Self.FK__diagnosti___Id_p__47DBAE45" FromRole="diagnostique" ToRole="patient" />
+        </EntityType>
+        <EntityType Name="medecin">
+          <Key>
+            <PropertyRef Name="Id_doc" />
+          </Key>
+          <Property Name="Id_doc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Tel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Nbrpatients" Type="Int32" />
+          <Property Name="ville" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Adresse" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Facebook" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Whatsapp" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Instagram" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Twitter" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Linkeden" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="Binary" MaxLength="64" FixedLength="true" />
+          <Property Name="salt" Type="Guid" />
+          <Property Name="latitude" Type="Double" />
+          <Property Name="longitude" Type="Double" />
+          <Property Name="cin" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="categorie" Relationship="Self.FK__categorie___Id_d__3D5E1FD2" FromRole="medecin" ToRole="categorie" />
+          <NavigationProperty Name="certificat" Relationship="Self.FK__certifica___Id_d__44FF419A" FromRole="medecin" ToRole="certificat" />
+          <NavigationProperty Name="diagnostique" Relationship="Self.FK__diagnosti___Id_d__48CFD27E" FromRole="medecin" ToRole="diagnostique" />
+          <NavigationProperty Name="nootation" Relationship="Self.FK__nootation___Id_d__4CA06362" FromRole="medecin" ToRole="nootation" />
+          <NavigationProperty Name="rendezvous" Relationship="Self.FK__rendezvou___Id_d__412EB0B6" FromRole="medecin" ToRole="rendezvous" />
+          <NavigationProperty Name="teleconsultation" Relationship="Self.FK__teleconsu___Id_d__5070F446" FromRole="medecin" ToRole="teleconsultation" />
+        </EntityType>
+        <EntityType Name="nootation">
+          <Key>
+            <PropertyRef Name="Id_not" />
+          </Key>
+          <Property Name="Id_not" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Note" Type="Double" />
+          <Property Name="C_Id_patient" Type="Int32" />
+          <Property Name="C_Id_doc" Type="Int32" />
+          <NavigationProperty Name="medecin" Relationship="Self.FK__nootation___Id_d__4CA06362" FromRole="nootation" ToRole="medecin" />
+          <NavigationProperty Name="patient" Relationship="Self.FK__nootation___Id_p__4BAC3F29" FromRole="nootation" ToRole="patient" />
+        </EntityType>
+        <EntityType Name="patient">
+          <Key>
+            <PropertyRef Name="Id_patient" />
+          </Key>
+          <Property Name="Id_patient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CIN" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Nom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Prenom" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Date_naissance" Type="DateTime" Precision="3" />
+          <Property Name="Tel" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="diagnostique" Relationship="Self.FK__diagnosti___Id_p__47DBAE45" FromRole="patient" ToRole="diagnostique" />
+          <NavigationProperty Name="nootation" Relationship="Self.FK__nootation___Id_p__4BAC3F29" FromRole="patient" ToRole="nootation" />
+          <NavigationProperty Name="rendezvous" Relationship="Self.FK__rendezvou___Id_p__403A8C7D" FromRole="patient" ToRole="rendezvous" />
+          <NavigationProperty Name="teleconsultation" Relationship="Self.FK__teleconsu___Id_p__4F7CD00D" FromRole="patient" ToRole="teleconsultation" />
+        </EntityType>
+        <EntityType Name="rendezvous">
+          <Key>
+            <PropertyRef Name="Id_rv" />
+          </Key>
+          <Property Name="Id_rv" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="dateprise" Type="DateTime" Precision="3" />
+          <Property Name="temp_rdv" Type="Time" Precision="7" />
+          <Property Name="C_Id_patient" Type="Int32" />
+          <Property Name="C_Id_doc" Type="Int32" />
+          <Property Name="C_Id_cat" Type="Int32" />
+          <NavigationProperty Name="categorie" Relationship="Self.FK__rendezvou___Id_c__4222D4EF" FromRole="rendezvous" ToRole="categorie" />
+          <NavigationProperty Name="medecin" Relationship="Self.FK__rendezvou___Id_d__412EB0B6" FromRole="rendezvous" ToRole="medecin" />
+          <NavigationProperty Name="patient" Relationship="Self.FK__rendezvou___Id_p__403A8C7D" FromRole="rendezvous" ToRole="patient" />
+        </EntityType>
+        <EntityType Name="teleconsultation">
+          <Key>
+            <PropertyRef Name="Id_telecon" />
+          </Key>
+          <Property Name="Id_telecon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Date_telecon" Type="DateTime" Precision="3" />
+          <Property Name="C_Id_patient" Type="Int32" />
+          <Property Name="C_Id_doc" Type="Int32" />
+          <NavigationProperty Name="medecin" Relationship="Self.FK__teleconsu___Id_d__5070F446" FromRole="teleconsultation" ToRole="medecin" />
+          <NavigationProperty Name="patient" Relationship="Self.FK__teleconsu___Id_p__4F7CD00D" FromRole="teleconsultation" ToRole="patient" />
+        </EntityType>
+        <Association Name="FK__categorie___Id_d__3D5E1FD2">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="0..1" />
+          <End Role="categorie" Type="Self.categorie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medecin">
+              <PropertyRef Name="Id_doc" />
+            </Principal>
+            <Dependent Role="categorie">
+              <PropertyRef Name="C_Id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rendezvou___Id_c__4222D4EF">
+          <End Role="categorie" Type="Self.categorie" Multiplicity="0..1" />
+          <End Role="rendezvous" Type="Self.rendezvous" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="categorie">
+              <PropertyRef Name="Id_cat" />
+            </Principal>
+            <Dependent Role="rendezvous">
+              <PropertyRef Name="C_Id_cat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__certifica___Id_d__44FF419A">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="0..1" />
+          <End Role="certificat" Type="Self.certificat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medecin">
+              <PropertyRef Name="Id_doc" />
+            </Principal>
+            <Dependent Role="certificat">
+              <PropertyRef Name="C_Id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__diagnosti___Id_d__48CFD27E">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="0..1" />
+          <End Role="diagnostique" Type="Self.diagnostique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medecin">
+              <PropertyRef Name="Id_doc" />
+            </Principal>
+            <Dependent Role="diagnostique">
+              <PropertyRef Name="C_Id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__diagnosti___Id_p__47DBAE45">
+          <End Role="patient" Type="Self.patient" Multiplicity="0..1" />
+          <End Role="diagnostique" Type="Self.diagnostique" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patient">
+              <PropertyRef Name="Id_patient" />
+            </Principal>
+            <Dependent Role="diagnostique">
+              <PropertyRef Name="C_Id_patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__nootation___Id_d__4CA06362">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="0..1" />
+          <End Role="nootation" Type="Self.nootation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medecin">
+              <PropertyRef Name="Id_doc" />
+            </Principal>
+            <Dependent Role="nootation">
+              <PropertyRef Name="C_Id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rendezvou___Id_d__412EB0B6">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="0..1" />
+          <End Role="rendezvous" Type="Self.rendezvous" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medecin">
+              <PropertyRef Name="Id_doc" />
+            </Principal>
+            <Dependent Role="rendezvous">
+              <PropertyRef Name="C_Id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teleconsu___Id_d__5070F446">
+          <End Role="medecin" Type="Self.medecin" Multiplicity="0..1" />
+          <End Role="teleconsultation" Type="Self.teleconsultation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="medecin">
+              <PropertyRef Name="Id_doc" />
+            </Principal>
+            <Dependent Role="teleconsultation">
+              <PropertyRef Name="C_Id_doc" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__nootation___Id_p__4BAC3F29">
+          <End Role="patient" Type="Self.patient" Multiplicity="0..1" />
+          <End Role="nootation" Type="Self.nootation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patient">
+              <PropertyRef Name="Id_patient" />
+            </Principal>
+            <Dependent Role="nootation">
+              <PropertyRef Name="C_Id_patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__rendezvou___Id_p__403A8C7D">
+          <End Role="patient" Type="Self.patient" Multiplicity="0..1" />
+          <End Role="rendezvous" Type="Self.rendezvous" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patient">
+              <PropertyRef Name="Id_patient" />
+            </Principal>
+            <Dependent Role="rendezvous">
+              <PropertyRef Name="C_Id_patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__teleconsu___Id_p__4F7CD00D">
+          <End Role="patient" Type="Self.patient" Multiplicity="0..1" />
+          <End Role="teleconsultation" Type="Self.teleconsultation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="patient">
+              <PropertyRef Name="Id_patient" />
+            </Principal>
+            <Dependent Role="teleconsultation">
+              <PropertyRef Name="C_Id_patient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="db_a7366b_getwellEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="categorie" EntityType="Self.categorie" />
+          <EntitySet Name="certificat" EntityType="Self.certificat" />
+          <EntitySet Name="diagnostique" EntityType="Self.diagnostique" />
+          <EntitySet Name="medecin" EntityType="Self.medecin" />
+          <EntitySet Name="nootation" EntityType="Self.nootation" />
+          <EntitySet Name="patient" EntityType="Self.patient" />
+          <EntitySet Name="rendezvous" EntityType="Self.rendezvous" />
+          <EntitySet Name="teleconsultation" EntityType="Self.teleconsultation" />
+          <AssociationSet Name="FK__categorie___Id_d__3D5E1FD2" Association="Self.FK__categorie___Id_d__3D5E1FD2">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="categorie" EntitySet="categorie" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rendezvou___Id_c__4222D4EF" Association="Self.FK__rendezvou___Id_c__4222D4EF">
+            <End Role="categorie" EntitySet="categorie" />
+            <End Role="rendezvous" EntitySet="rendezvous" />
+          </AssociationSet>
+          <AssociationSet Name="FK__certifica___Id_d__44FF419A" Association="Self.FK__certifica___Id_d__44FF419A">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="certificat" EntitySet="certificat" />
+          </AssociationSet>
+          <AssociationSet Name="FK__diagnosti___Id_d__48CFD27E" Association="Self.FK__diagnosti___Id_d__48CFD27E">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="diagnostique" EntitySet="diagnostique" />
+          </AssociationSet>
+          <AssociationSet Name="FK__diagnosti___Id_p__47DBAE45" Association="Self.FK__diagnosti___Id_p__47DBAE45">
+            <End Role="patient" EntitySet="patient" />
+            <End Role="diagnostique" EntitySet="diagnostique" />
+          </AssociationSet>
+          <AssociationSet Name="FK__nootation___Id_d__4CA06362" Association="Self.FK__nootation___Id_d__4CA06362">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="nootation" EntitySet="nootation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rendezvou___Id_d__412EB0B6" Association="Self.FK__rendezvou___Id_d__412EB0B6">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="rendezvous" EntitySet="rendezvous" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teleconsu___Id_d__5070F446" Association="Self.FK__teleconsu___Id_d__5070F446">
+            <End Role="medecin" EntitySet="medecin" />
+            <End Role="teleconsultation" EntitySet="teleconsultation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__nootation___Id_p__4BAC3F29" Association="Self.FK__nootation___Id_p__4BAC3F29">
+            <End Role="patient" EntitySet="patient" />
+            <End Role="nootation" EntitySet="nootation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__rendezvou___Id_p__403A8C7D" Association="Self.FK__rendezvou___Id_p__403A8C7D">
+            <End Role="patient" EntitySet="patient" />
+            <End Role="rendezvous" EntitySet="rendezvous" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teleconsu___Id_p__4F7CD00D" Association="Self.FK__teleconsu___Id_p__4F7CD00D">
+            <End Role="patient" EntitySet="patient" />
+            <End Role="teleconsultation" EntitySet="teleconsultation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="db_a7366b_getwellModelStoreContainer" CdmEntityContainer="db_a7366b_getwellEntities1">
+          <EntitySetMapping Name="categorie">
+            <EntityTypeMapping TypeName="db_a7366b_getwellModel.categorie">
+              <MappingFragment StoreEntitySet="categorie">
+                <ScalarProperty Name="Id_cat" ColumnName="Id_cat" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="C_Id_doc" ColumnName="#Id_doc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="certificat">
+            <EntityTypeMapping TypeName="db_a7366b_getwellModel.certificat">
+              <MappingFragment StoreEntitySet="certificat">
+                <ScalarProperty Name="Num_cert" ColumnName="Num_cert" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="institut" ColumnName="institut" />
+                <ScalarProperty Name="annén" ColumnName="annén" />
+                <ScalarProperty Name="C_Id_doc" ColumnName="#Id_doc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="diagnostique">
+            <EntityTypeMapping TypeName="db_a7366b_getwellModel.diagnostique">
+              <MappingFragment StoreEntitySet="diagnostique">
+                <ScalarProperty Name="Id_diag" ColumnName="Id_diag" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date_diag" ColumnName="Date_diag" />
+                <ScalarProperty Name="C_Id_patient" ColumnName="#Id_patient" />
+                <ScalarProperty Name="C_Id_doc" ColumnName="#Id_doc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="medecin">
+            <EntityTypeMapping TypeName="db_a7366b_getwellModel.medecin">
+              <MappingFragment StoreEntitySet="medecin">
+                <ScalarProperty Name="Id_doc" ColumnName="Id_doc" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nbrpatients" ColumnName="Nbrpatients" />
+                <ScalarProperty Name="ville" ColumnName="ville" />
+                <ScalarProperty Name="Adresse" ColumnName="Adresse" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Whatsapp" ColumnName="Whatsapp" />
+                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="Linkeden" ColumnName="Linkeden" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="salt" ColumnName="salt" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="cin" ColumnName="cin" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nootation">
+            <EntityTypeMapping TypeName="db_a7366b_getwellModel.nootation">
+              <MappingFragment StoreEntitySet="nootation">
+                <ScalarProperty Name="Id_not" ColumnName="Id_not" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+                <ScalarProperty Name="C_Id_patient" ColumnName="#Id_patient" />
+                <ScalarProperty Name="C_Id_doc" ColumnName="#Id_doc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="patient">
+            <EntityTypeMapping TypeName="db_a7366b_getwellModel.patient">
+              <MappingFragment StoreEntitySet="patient">
+                <ScalarProperty Name="Id_patient" ColumnName="Id_patient" />
+                <ScalarProperty Name="CIN" ColumnName="CIN" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Date_naissance" ColumnName="Date_naissance" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rendezvous">
+            <EntityTypeMapping TypeName="db_a7366b_getwellModel.rendezvous">
+              <MappingFragment StoreEntitySet="rendezvous">
+                <ScalarProperty Name="Id_rv" ColumnName="Id_rv" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="dateprise" ColumnName="dateprise" />
+                <ScalarProperty Name="temp_rdv" ColumnName="temp_rdv" />
+                <ScalarProperty Name="C_Id_patient" ColumnName="#Id_patient" />
+                <ScalarProperty Name="C_Id_doc" ColumnName="#Id_doc" />
+                <ScalarProperty Name="C_Id_cat" ColumnName="#Id_cat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teleconsultation">
+            <EntityTypeMapping TypeName="db_a7366b_getwellModel.teleconsultation">
+              <MappingFragment StoreEntitySet="teleconsultation">
+                <ScalarProperty Name="Id_telecon" ColumnName="Id_telecon" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Date_telecon" ColumnName="Date_telecon" />
+                <ScalarProperty Name="C_Id_patient" ColumnName="#Id_patient" />
+                <ScalarProperty Name="C_Id_doc" ColumnName="#Id_doc" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

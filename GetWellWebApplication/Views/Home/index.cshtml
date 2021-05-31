@@ -1,0 +1,198 @@
+﻿@model GetWellWebApplication.Models.medecin
+<div id="Load">
+    <div class="container">
+        <div class="row">
+            <div class=".col-md-4 col-sm-12 col-lg-4">
+                <div id="Loader"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="content">
+    <header>
+        <nav class="navbar sticky-top ">
+            <a class="navbar-brand" href="#">
+                <img src="~/Images/Logo.png" class="Logo">
+            </a>
+            <form class="d-flex">
+                @Html.ActionLink("Tele consultation", "TeleConsultation", "Home", null, new { @class = "btn Btn-tele-consulatation" })
+                @Html.ActionLink("Prendre un rendez-vous", "PrendreRendezvous", "Home", null, new { @class = "btn Btn-Prendre-rendez-vous" })
+            </form>
+        </nav>
+        <div class="container-fluid">
+            <div class="row title-section">
+                <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="title-container">
+                        <h1 class="Index-title">Prendre rendez-vous avec <b class="getwell">Getwell</b>.</h1>
+                        <p class="sub-title">La plus simple maniere pour prendre des rendez-vous ou Teleconsultations avec votre Medecin.</p>
+                    </div>
+                    <hr class="prgrss">
+                </div>
+                <div class="col-sm-12 col-md-12 col-lg-6">
+                    <div class="doctor-img1-container">
+                        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-inner doctor-img1">
+                                <div class="carousel-item active ">
+                                    <img src="~/Images/Doctors_op.jpg">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="~/Images/pexels-ron-lach-7579823.jpg">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="~/Images/pexels-pixabay-40568.jpg">
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="doctor-name">
+                        <div class="name">
+                            Docteur
+                            <b id="bld"></b>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="section-2">
+        <div class="container">
+            <div class="row section-2-content">
+                <div class="col-sm-12 col-md-6 col-lg-6">
+                    <img src="~/Images/pexels-mart-production-7089336.jpg" class="section-2-image">
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-6 informations-card">
+                       <div class="title-informations-card">
+                        <div>
+                            <h4>docteur</h4>
+                            <h3>Mohamed Taibi</h3>
+                        </div>
+                        <div class="notation">
+                            
+                            
+                        </div>
+                    </div>
+                    <div>
+                        <div class="Location">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="Email">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="Tel">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="section-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <h2>Diplome et formation</h2>
+                </div>
+            </div>
+            <div class="row cards-container">
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <h2>Le spécialité</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="spacialite">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-7 col-lg-7">
+                                    <div type="button" id="specialite"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="section-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <h3>GEO-LOCALISATION</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div id="map">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+    @Html.Partial("footer")
+    <script>
+        $(window).on('pageshow', function () {
+            $('#Load').fadeOut(1000);
+            $('#content').fadeIn(1000);
+        });
+        $(document).ready(function(){
+           $.ajax({
+                type: 'GET',
+                url: '@Url.Action("GetDoctorById", "Home")',
+                dataType: 'json',
+                success: function(data){ 
+        console.log(data);
+                   $('.doctor-name').append("<img src='/" + data[0].Image + "' class='Doctor-name-img'>");
+                   $('#bld').html(data[0].Nom + " " + data[0].Prenom);
+                   if(data[0].notation != null){
+                       $('.notation').append("<i class='fas fa-star'></i><p id='notation'>" + data[0].notation.Note + "</p>");
+                   }
+                   $('.Location').append("<p>" + data[0].Adresse + "</p>");
+                   $('.Email').append("<p>" + data[0].Email + "</p>")
+                   $('.Tel').append("<p>" + data[0].Tel + "</p>")
+                   $('#specialite').html(data[0].categorie.NomCat);
+                   $.each(data, function(i, item){
+                         $('.cards-container').append("<div class='col-sm-12 col-md-4 col-lg-4'><div class='card'><div class='card-body'><h3 class='card-title'>" + item.certificat[0].annén + "</h3><p class='card-text'>" + item.certificat[0].NomCert + "</p><p>" + item.certificat[0].institut + "</p></div></div></div>")
+                   });
+                   const { latitude, longitude } = data[0];
+                   
+                   const map = L.map('map').setView([latitude, longitude], 13);
+                   const attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                   
+                   const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+                   const tiles = L.tileLayer(tileUrl, { attribution });
+                   tiles.addTo(map);
+                   
+                   var GetWellIcon = L.icon({
+                       iconUrl: "/Images/LogoMarker5.png",
+                       iconSize: [38, 35],
+                       iconAnchor: [25, 16],
+                       popupAnchor: [-3, -76],
+                       shadowSize: [68, 95],
+                       shadowAnchor: [22, 94]
+                   });
+                   
+                   const marker = L.marker([latitude, longitude], { icon: GetWellIcon }).addTo(map);
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            });
+        });
+        
+    </script>
+
+
+

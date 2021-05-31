@@ -1,0 +1,62 @@
+﻿@model GetWellWebApplication.Models.rendezvous
+
+@Styles.Render("~/Content/materializer")
+
+<header>
+    <nav class="navbar">
+        <a class="navbar-brand" href="/home">
+            <img src="~/Images/Logo.png" class="Logo">
+        </a>
+    </nav>
+</header>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    <div class="informations-patient black-bg">
+        <div class="container-fluid form-section">
+            <div class="row">
+                <div class="col-sm-12 col-md-4 com-lg-4 title-container-informations">
+                    <h1 class="Calender-title">Choisir <b>la date</b> de rendez-vous</h1>
+                </div>
+                <div class="col-sm-12 col-md-8 col-lg-8">
+                    <form method="post">
+                        <div class="container-fluid">
+                            <div class="row calendar-form">
+                                <div class="col-sm-12 calendar-title">
+                                    <p>insérez la date à laquelle vous souhaitez avoir votre <b>rendez-vous</b></p>
+                                </div>
+                                <div class="col-sm-12">
+                                    <input type="text" name="JourRendervous" class="datepicker" placeholder="entrez la date">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12" id="button-container">
+                                    <a href="RendezVous_heur.html">
+                                        <input id="Suivant" type="submit" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            @Html.Partial("footer")
+        </div>
+
+    </div>
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+@Scripts.Render("~/bundles/materializer")
+<script>
+    const calendar = document.querySelector('.datepicker');
+    M.Datepicker.init(calendar, { autoClose: true, format: "dd-mm-yyyy", disableWeekends: true});
+        $(window).on('pageshow', function () {
+            $('#Load').fadeOut(1000);
+            $('#content').fadeIn(1000);
+        });
+</script>
+
+
+
+
