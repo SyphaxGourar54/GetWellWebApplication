@@ -181,8 +181,6 @@ namespace GetWellWebApplication.Controllers
             return new EmptyResult();
         }
 
-
-
         [HttpGet]
         public ActionResult JourRendezvous()
         {
@@ -200,7 +198,7 @@ namespace GetWellWebApplication.Controllers
         {
             ViewBag.Day = TempData["JourRendezvous"];
             TempData.Keep("JourRendezvous");
-            return RedirectToAction("Accueil");
+            return View();
         }
 
         [HttpPost]
@@ -210,7 +208,7 @@ namespace GetWellWebApplication.Controllers
 
             int result = AddAppointment(Convert.ToString(TempData["JourRendezvous"]),Hour,Convert.ToInt32(TempData["Id_pat"]), Convert.ToInt32(TempData["ID"]));
 
-            return View();
+            return ActionResult("Accueil");
         }
 
         [HttpGet]

@@ -11,7 +11,7 @@
 <div id="content">
     <header>
         <nav class="navbar sticky-top ">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/Home/Accueil">
                 <img src="~/Images/Logo.png" class="Logo">
             </a>
             <form class="d-flex">
@@ -73,7 +73,7 @@
                        <div class="title-informations-card">
                         <div>
                             <h4>docteur</h4>
-                            <h3>Mohamed Taibi</h3>
+                            <h3></h3>
                         </div>
                         <div class="notation">
                             
@@ -161,7 +161,8 @@
                    }
                    $('.Location').append("<p>" + data[0].Adresse + "</p>");
                    $('.Email').append("<p>" + data[0].Email + "</p>")
-                   $('.Tel').append("<p>" + data[0].Tel + "</p>")
+                    $('.Tel').append("<p>" + data[0].Tel + "</p>")
+                    $('.title-informations-card > div > h3').html(data[0].Nom + " " + data[0].Prenom);
                    $('#specialite').html(data[0].categorie.NomCat);
                    $.each(data, function(i, item){
                          $('.cards-container').append("<div class='col-sm-12 col-md-4 col-lg-4'><div class='card'><div class='card-body'><h3 class='card-title'>" + item.certificat[0].annén + "</h3><p class='card-text'>" + item.certificat[0].NomCert + "</p><p>" + item.certificat[0].institut + "</p></div></div></div>")
